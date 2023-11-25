@@ -56,6 +56,7 @@ $(document).ready(function () {
             if (!usernameDisponivel) {
                 exibirModalErro("O nome inserido já se encontra em uso.")
             } else{
+                const modalSucesso = new bootstrap.Modal('#modalSucesso');
                 let usuario = {
                     username: username.toLowerCase(),
                     nome: nome.toUpperCase(),
@@ -63,7 +64,11 @@ $(document).ready(function () {
                     senha: senha,
                     admin: document.getElementById('ehAdmin').checked
                 }
-                postNovoUsuario(usuario, )
+                postNovoUsuario(usuario, function (usuarioCriado){
+                    if(usuarioCriado){
+                        modalSucesso.show()
+                    } else exibirModalErro('Ocorreu um erro ao criar o usuário.')
+                } )
             };
         });
 
