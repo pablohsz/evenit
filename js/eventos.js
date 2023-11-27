@@ -13,9 +13,10 @@ $(document).ready(function () {
             senha: document.getElementById("senha").value,
         };
 
-        postCredenciais((credenciais), function (matchCredencial) {
+        postCredenciais((credenciais), function (matchCredencial, response) {
             if (matchCredencial) {
-                window.location.href = '../pages/principal.html'
+                localStorage.setItem('usuario', JSON.stringify(response));
+                window.location.href = './pages/principal.html'
             } else modalLogin.show();
         });
     });
@@ -52,10 +53,10 @@ $(document).ready(function () {
             return;
         }
 
-        getVerificaUsuario(username, function (usernameDisponivel){
+        getVerificaUsuario(username, function (usernameDisponivel) {
             if (!usernameDisponivel) {
                 exibirModalErro("O nome inserido já se encontra em uso.")
-            } else{
+            } else {
                 const modalSucesso = new bootstrap.Modal('#modalSucesso');
                 let usuario = {
                     username: username.toLowerCase(),
@@ -64,14 +65,14 @@ $(document).ready(function () {
                     senha: senha,
                     admin: document.getElementById('ehAdmin').checked
                 }
-                postNovoUsuario(usuario, function (usuarioCriado){
-                    if(usuarioCriado){
+                postNovoUsuario(usuario, function (usuarioCriado) {
+                    if (usuarioCriado) {
                         modalSucesso.show()
                     } else exibirModalErro('Ocorreu um erro ao criar o usuário.')
-                } )
-            };
+                })
+            }
+            ;
         });
-
 
         function exibirModalErro(mensagem) {
             const modalCadastro = new bootstrap.Modal('#modalFalhaCadastro');
@@ -80,9 +81,85 @@ $(document).ready(function () {
             modalCadastro.show();
         }
 
+    });
 
+    $('#formCategoria').submit(function (event) {
 
+        event.preventDefault();
+        if (this.checkValidity() === false) return;
 
+        let categoria = {
+            categoria: document.getElementById("categoria").value.toLowerCase(),
+            descricao: document.getElementById("descricao").value
+        }
+
+        postNovaCategoria((categoria), function (sucesso, response) {
+            if (sucesso) {
+                exibirModal('Categoria criada!', 'Categoria de id n°' + response.id + " criada com sucesso.");
+                $('#formCategoria')[0].reset();
+            } else {
+                exibirModal('Erro ao adicionar ', 'Ocorreu um erro ao adicionar a categoria. Tente novamente mais tarde.');
+            }
+        });
+
+        function exibirModal(titulo, mensagem) {
+            const modalNovaCategoria = new bootstrap.Modal('#modalNovaCategoria');
+            const mensagemModal = document.getElementById('mensagemModal');
+            const tituloModal = document.getElementById('tituloModal');
+            mensagemModal.textContent = mensagem;
+            tituloModal.textContent = titulo;
+            modalNovaCategoria.show();
+        }
+    });
+
+    $('#formEvento').submit(function (event) {
+
+        event.preventDefault();
+        if (this.checkValidity() === false) return;
+        const radioButtons = document.getElementsByName('radioModalidade');
+
+        let dataInicio = document.getElementById("dtInicio").value;
+        let dataFinal = document.getElementById("dtFim").value;
+
+        if (!validaDatas(dataInicio, dataFinal)) {
+            exibirModal('Data inválida', 'As datas devem atender aos seguintes critérios:\n\nA data inicial deve ser igual ou posterior à 01/01/2002;\nA data final deve ser igual ou anterior à 01/01/2099;\nA data inicial deve ser anterior ou igual à data final.');
+            return;
+        }
+
+        let evento = {
+            titulo: document.getElementById("titulo").value.toUpperCase(),
+            descricao: document.getElementById("descricao").value,
+            categoria: parseInt(document.getElementById('categoria').value),
+            usuario: document.getElementById("autor").value,
+            dataInicial: converterDataFormato(dataInicio),
+            dataFinal: converterDataFormato(dataFinal)
+        };
+
+        radioButtons.forEach(function (radio) {
+            if (radio.checked) {
+                evento.modalidade = radio.value;
+            }
+        });
+
+        postNovoEvento((evento), function (sucesso, response) {
+            if (sucesso) {
+                exibirModal('Evento criado!', 'Evento de id n°' + response.id + " evento com sucesso.");
+                $('#formEvento')[0].reset();
+                document.getElementById("autor").value = dadosUsuario.username;
+            } else {
+                exibirModal('Erro ao adicionar ', 'Ocorreu um erro ao adicionar a evento. Tente novamente mais tarde.');
+            }
+        });
+
+        function exibirModal(titulo, mensagem) {
+            const modalNovaEvento = new bootstrap.Modal('#modalNovoEvento');
+            const mensagemModal = document.getElementById('mensagemModal');
+            const tituloModal = document.getElementById('tituloModal');
+            mensagem = mensagem.replace(/\n/g, '<br>');
+            mensagemModal.innerHTML = mensagem;
+            tituloModal.textContent = titulo;
+            modalNovaEvento.show();
+        }
     });
 
 });

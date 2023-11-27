@@ -31,7 +31,8 @@
                     <a class="btn btn-toggle align-items-center rounded collapsed" href="principal.html">Principal</a>
 
                 </li>
-                <li class="mb-1">
+
+                <li id="liCriarNovo" class="mb-1">
                     <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
                         Criar Novo
                     </button>
@@ -42,6 +43,14 @@
                         </ul>
                     </div>
                 </li>
+
+                <script>
+                    const dadosUsuario = JSON.parse(localStorage.getItem('usuario'));
+                    if(!dadosUsuario.admin){
+                        document.getElementById('liCriarNovo').style.display = 'none';
+                    }
+                </script>
+
                 <li class="mb-1">
                     <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
                         Consultar
