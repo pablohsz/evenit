@@ -16,7 +16,7 @@ $(document).ready(function () {
         postCredenciais((credenciais), function (matchCredencial, response) {
             if (matchCredencial) {
                 localStorage.setItem('usuario', JSON.stringify(response));
-                window.location.href = './pages/principal.html'
+                window.location.href = '../pages/principal.html'
             } else modalLogin.show();
         });
     });
