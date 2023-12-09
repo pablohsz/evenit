@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:9095';
+const baseUrl = 'http://6402-2804-d59-9658-6400-5164-2523-2879-652c.ngrok-free.app';
 
 function postCredenciais(credenciais, callback) {
     $.ajax({

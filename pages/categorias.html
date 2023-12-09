@@ -25,7 +25,7 @@
         <!--Início da sidebar-->
         <div class="flex-shrink-0 p-3 bg-light sidenavbar">
             <!--Item de marca-->
-            <a href="principal.html" class="d-flex align-items-center mb-3 border-bottom">
+            <a href="/evenit/pages/principal.html" class="d-flex align-items-center mb-3 border-bottom">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="644"
                      height="256" viewBox="0 0 644 256">
                     <image id="logoname" width="644" height="256"
@@ -66,12 +66,17 @@
                 <!-- Componente de Pesquisa Simples --->
                 <div class="col">
                     <div class="input-group">
-                        <form method="post" needs-validation id="formPesquisaSimples"
+                        <form class="needs-validation" method="post" novalidate id="formPesquisaSimples"
                               style="display: flex; flex-direction: row;">
                             <div class="input-group-prepend">
                                 <label class="input-group-text">ID</label>
                             </div>
-                            <input type="text" class="form-control" id="idBuscado" pattern="-?\d*(\.\d+)?">
+                            <div>
+                                <input type="text" class="form-control" id="idBuscado" pattern="^\d*$">
+                                <div class="invalid-feedback">
+                                    O id deve conter somente números.
+                                </div>
+                            </div>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-secondary" type="submit">Buscar</button>
                             </div>
@@ -241,12 +246,6 @@
 </div>
 
 <script>
-    const inputBuscar = document.getElementById('idBuscado')
-
-    inputBuscar.addEventListener("invalid", function (e) {
-        inputBuscar.setCustomValidity('O id deve conter somente números.');
-    });
-
 
     (() => {
         'use strict'

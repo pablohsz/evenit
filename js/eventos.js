@@ -82,36 +82,6 @@ $(document).ready(function () {
 
     });
 
-    /* $('#formCategoria').submit(function (event) {
-
-         event.preventDefault();
-         if (this.checkValidity() === false) return;
-
-         let categoria = {
-             categoria: document.getElementById("categoria").value.toLowerCase(),
-             descricao: document.getElementById("descricao").value
-         }
-
-         postNovaCategoria((categoria), function (sucesso, response) {
-             if (sucesso) {
-                 exibirModal('Categoria criada!', 'Categoria de id n°' + response.id + " criada com sucesso.");
-                 $('#formCategoria')[0].reset();
-             } else {
-                 exibirModal('Erro ao adicionar ', 'Ocorreu um erro ao adicionar a categoria. Tente novamente mais tarde.');
-             }
-         });
-
-         function exibirModal(titulo, mensagem) {
-             const modalNovaCategoria = new bootstrap.Modal('#modalNovaCategoria');
-             const mensagemModal = document.getElementById('mensagemModal');
-             const tituloModal = document.getElementById('tituloModal');
-             mensagemModal.textContent = mensagem;
-             tituloModal.textContent = titulo;
-             modalNovaCategoria.show();
-         }
-     });*/
-
-
     //Página de Categorias
 
     $('#formPesquisaSimples').submit(function (event) {
@@ -126,8 +96,6 @@ $(document).ready(function () {
 
         getCategorias(function (sucesso, response) {
             if (sucesso) {
-
-
                 if (id != '') {
                     let regex = new RegExp(id, 'gmi');
                     response.forEach(categoria => {
@@ -413,6 +381,5 @@ $(document).ready(function () {
             exibirToastRelatorio('Selecione um tipo de relatório para continuar.');
         }
     });
-
 
 });
