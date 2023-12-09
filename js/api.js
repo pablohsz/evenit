@@ -19,6 +19,9 @@ function getVerificaUsuario(username, callback) {
     $.ajax({
         url: baseUrl + '/usuario/' + username,
         method: 'GET',
+        headers: {
+            'ngrok-skip-browser-warning': 'skip'
+        },
         success: function (response) {
             callback(true)
         },
@@ -62,6 +65,9 @@ function getCategorias(callback) {
     $.ajax({
         url: baseUrl + '/categorias',
         method: 'GET',
+        headers: {
+            'ngrok-skip-browser-warning': 'skip'
+        },
         success: function (response) {
             callback(true, response);
         },
@@ -103,6 +109,9 @@ function getEventos(callback) {
     $.ajax({
         url: baseUrl + '/eventos',
         method: 'GET',
+        headers: {
+            'ngrok-skip-browser-warning': 'skip'
+        },
         success: function (response) {
             callback(true, response);
         },
