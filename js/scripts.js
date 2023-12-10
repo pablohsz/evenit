@@ -49,65 +49,65 @@ function listarEventos(eventos) {
     listaEventos.innerHTML = '';
 
     if (eventos.length > 0) {
-    eventos.forEach(evento => {
+        eventos.forEach(evento => {
 
-        const divItem = document.createElement('div');
-        divItem.classList.add('list-group-item', 'list-group-item-action');
-        const divCabecalho = document.createElement('div');
-        divCabecalho.classList.add('d-flex', 'w-100', 'justify-content-between');
+            const divItem = document.createElement('div');
+            divItem.classList.add('list-group-item', 'list-group-item-action');
+            const divCabecalho = document.createElement('div');
+            divCabecalho.classList.add('d-flex', 'w-100', 'justify-content-between');
 
-        const header = document.createElement('h5');
-        header.classList.add('mb-1');
-        header.textContent = `${evento.id} - ${evento.titulo.toUpperCase()}`;
+            const header = document.createElement('h5');
+            header.classList.add('mb-1');
+            header.textContent = `${evento.id} - ${evento.titulo.toUpperCase()}`;
 
-        const small = document.createElement('small');
-        small.classList.add('text-body-secondary');
-        small.textContent = `${evento.categoria.categoria.toUpperCase()}`;
+            const small = document.createElement('small');
+            small.classList.add('text-body-secondary');
+            small.textContent = `${evento.categoria.categoria.toUpperCase()}`;
 
-        divCabecalho.appendChild(header);
-        divCabecalho.appendChild(small);
+            divCabecalho.appendChild(header);
+            divCabecalho.appendChild(small);
 
-        const smallSecundaria = document.createElement('small');
-        smallSecundaria.classList.add('text-body-secondary');
-        smallSecundaria.textContent = `${converterData(evento.dataInicial)} - ${converterData(evento.dataFinal)}`;
+            const smallSecundaria = document.createElement('small');
+            smallSecundaria.classList.add('text-body-secondary');
+            smallSecundaria.textContent = `${converterData(evento.dataInicial)} - ${converterData(evento.dataFinal)}`;
 
-        const divDescricao = document.createElement('div');
-        divDescricao.classList.add('d-flex', 'justify-content-between', 'align-items-start');
+            const divDescricao = document.createElement('div');
+            divDescricao.classList.add('d-flex', 'justify-content-between', 'align-items-start');
 
-        const descricao = document.createElement('p');
-        descricao.classList.add('mb-1');
-        descricao.textContent = evento.descricao;
+            const descricao = document.createElement('p');
+            descricao.classList.add('mb-1');
+            descricao.textContent = evento.descricao;
 
-        divDescricao.appendChild(descricao);
+            divDescricao.appendChild(descricao);
 
-        if (ehAdministrador()) {
-            const grupoBtn = document.createElement('div');
-            grupoBtn.classList.add('btn-group');
-            const btnEditar = document.createElement('button');
-            btnEditar.classList.add('btn', 'btn-primary', 'btn-sm');
-            btnEditar.textContent = 'Editar';
-            btnEditar.onclick = function () {
-                editarEvento(evento);
-            };
-            const btnExcluir = document.createElement('button');
-            btnExcluir.classList.add('btn', 'btn-danger', 'btn-sm');
-            btnExcluir.textContent = 'Excluir';
-            btnExcluir.onclick = function () {
-                deletarEvento(evento.id);
-            };
+            if (ehAdministrador()) {
+                const grupoBtn = document.createElement('div');
+                grupoBtn.classList.add('btn-group');
+                const btnEditar = document.createElement('button');
+                btnEditar.classList.add('btn', 'btn-primary', 'btn-sm');
+                btnEditar.textContent = 'Editar';
+                btnEditar.onclick = function () {
+                    editarEvento(evento);
+                };
+                const btnExcluir = document.createElement('button');
+                btnExcluir.classList.add('btn', 'btn-danger', 'btn-sm');
+                btnExcluir.textContent = 'Excluir';
+                btnExcluir.onclick = function () {
+                    deletarEvento(evento.id);
+                };
 
-            grupoBtn.appendChild(btnEditar);
-            grupoBtn.appendChild(btnExcluir);
-            divDescricao.appendChild(grupoBtn);
-        }
+                grupoBtn.appendChild(btnEditar);
+                grupoBtn.appendChild(btnExcluir);
+                divDescricao.appendChild(grupoBtn);
+            }
 
-        divItem.appendChild(divCabecalho);
-        divItem.appendChild(smallSecundaria);
-        divItem.appendChild(divDescricao);
+            divItem.appendChild(divCabecalho);
+            divItem.appendChild(smallSecundaria);
+            divItem.appendChild(divDescricao);
 
-        listaEventos.appendChild(divItem);
+            listaEventos.appendChild(divItem);
 
-    });
+        });
     } else {
         exibirMensagemEvento('Nenhum item a ser exibido.');
     }
@@ -308,7 +308,7 @@ function validarCampo(entrada, tipo) {
     }
 }
 
-function toastErroEvento(mensagem){
+function toastErroEvento(mensagem) {
     const toast = document.getElementById('toastEventoErro');
     const toastBody = document.getElementById('toastErroMensagem');
     const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
@@ -317,11 +317,90 @@ function toastErroEvento(mensagem){
     toastBootstrap.show();
 }
 
-function toastErroCategoria(mensagem){
+function toastErroCategoria(mensagem) {
     const toast = document.getElementById('toastCategoriaErro');
     const toastBody = document.getElementById('toastErroMensagem');
     const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toast);
 
     toastBody.textContent = mensagem;
     toastBootstrap.show();
+}
+
+
+function proximosEventos() {
+    let data = new Date();
+
+    let ano = data.getFullYear();
+    let mes = ('0' + (data.getMonth() + 1)).slice(-2);
+    let dia = ('0' + data.getDate()).slice(-2);
+
+    let dataAtual = `${ano}-${mes}-${dia}`;
+    let dataLimite = '2099-11-30';
+
+
+    getEventosPorData(dataAtual, dataLimite, function (sucesso, response) {
+        if (sucesso) {
+            const proximosEventos = document.getElementById('proximosEventos');
+            proximosEventos.innerHTML = '';
+
+            if (response.length > 0) {
+                response.forEach(evento => {
+
+                    const divItem = document.createElement('div');
+                    divItem.classList.add('card', 'mb-3', 'mr-2', 'custom-card-image');
+
+                    const img = document.createElement('img');
+                    img.classList.add('card-img-top');
+                    img.src = '/evenit/img/event-card.png'
+
+                    const divBody = document.createElement('div');
+                    divBody.classList.add('card-body');
+
+                    const header = document.createElement('h5');
+                    header.classList.add('card-title');
+                    header.textContent = `${evento.titulo.toUpperCase()}`;
+
+                    const small = document.createElement('small');
+                    small.classList.add('text-body-secondary');
+                    small.textContent = `${converterData(evento.dataInicial)} - ${converterData(evento.dataFinal)}`;
+
+                    const descricao = document.createElement('p');
+                    descricao.classList.add('card-text');
+                    descricao.textContent = evento.descricao;
+
+                    const smallSecundaria = document.createElement('small');
+                    smallSecundaria.classList.add('text-body-secondary');
+                    smallSecundaria.textContent = `${evento.categoria.categoria.toUpperCase()}`;
+
+                    divBody.appendChild(header);
+                    divBody.appendChild(small);
+                    divBody.appendChild(descricao);
+                    divBody.appendChild(smallSecundaria);
+
+                    divItem.appendChild(img);
+                    divItem.appendChild(divBody);
+
+                    proximosEventos.appendChild(divItem);
+
+                });
+            } else {
+                exibirMensagemPrincipal('Nenhum item a ser exibido.');
+            }
+        } else {
+            exibirMensagemPrincipal('Ocorreu uma falha na comunicação com o servidor.');
+        }
+    });
+
+
+}
+
+function exibirMensagemPrincipal(mensagem) {
+    let lista = document.getElementById('conteudoPrincipal');
+    while (lista.firstChild) {
+        lista.removeChild(lista.firstChild);
+    }
+    let paragrafoMensagem = document.createElement('p');
+    paragrafoMensagem.classList.add('text-center', 'lead');
+    paragrafoMensagem.textContent = mensagem;
+    lista.appendChild(paragrafoMensagem);
 }

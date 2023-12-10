@@ -1,4 +1,4 @@
-const baseUrl = 'https://6402-2804-d59-9658-6400-5164-2523-2879-652c.ngrok-free.app';
+const baseUrl = 'https://dc4f-2804-d59-9658-6400-cd86-152f-d7a5-1215.ngrok-free.app';
 
 function postCredenciais(credenciais, callback) {
     $.ajax({
@@ -108,6 +108,22 @@ function deleteCategoria(id, callback) {
 function getEventos(callback) {
     $.ajax({
         url: baseUrl + '/eventos',
+        method: 'GET',
+        headers: {
+            'ngrok-skip-browser-warning': 'skip'
+        },
+        success: function (response) {
+            callback(true, response);
+        },
+        error: function (error) {
+            callback(false, error);
+        }
+    });
+}
+
+function getEventosPorData(dtInicial, dtFinal, callback) {
+    $.ajax({
+        url: baseUrl + `/eventos/data?inicio=${dtInicial}&fim=${dtFinal}`,
         method: 'GET',
         headers: {
             'ngrok-skip-browser-warning': 'skip'

@@ -5,18 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EvenIT</title>
 
-
-    <!-- Inclua as bibliotecas do Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="../stylesheet.css">
+    <link rel="stylesheet" href="/evenit/stylesheet.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
-<script src="../js/api.js"></script>
-<script src="../js/scripts.js"></script>
+<script src="/evenit/js/api.js"></script>
+<script src="/evenit/js/scripts.js"></script>
 <script>
     const dadosUsuario = JSON.parse(localStorage.getItem('usuario'));
 </script>
@@ -52,13 +50,17 @@
                     <!--Item da sidebar-->
                     <a class="btn btn-toggle align-items-center rounded collapsed" href="/evenit/pages/relatorios.html">Relatórios</a>
                 </li>
+                <li class="mb-1">
+                    <!--Item da sidebar-->
+                    <a class="btn btn-toggle align-items-center rounded collapsed" href="/evenit/index.html">Sair</a>
+                </li>
             </ul>
         </div>
         <!--Fim da sidebar-->
         <div class="col py-3 content">
-            <h3>Página de Consulta as Categorias</h3>
+            <h3>Categorias</h3>
             <p class="lead">
-                Aqui deverá conter uma tela com as categorias cadastradas e a opção de excluí-las e editá-las.
+                Visualize e adicione novas categorias cadastradas nesta página.
             </p>
 
 
@@ -125,12 +127,12 @@
 </div>
 
 <!-- Modal adicionar categoria -->
-<div class="modal fade" id="cadastroCategoriaModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="cadastroCategoriaModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="cadastroModalLabel">Adicionar Categoria</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <form class="needs-validation" method="post" novalidate id="formCategoria">
                 <div class="modal-body">
@@ -161,12 +163,12 @@
 </div>
 
 <!-- Modal editar categoria -->
-<div class="modal fade" id="edicaoCategoriaModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="edicaoCategoriaModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5">Editar Categoria</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <form class="needs-validation" method="post" needs-validation id="formEdicaoCategoria">
                 <div class="modal-body">
@@ -201,12 +203,12 @@
 </div>
 
 <!-- Modal deletar categoria -->
-<div class="modal fade" id="exclusaoCategoriaModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="exclusaoCategoriaModal" tabindex="-1" >
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5">Confirmar Exclusão</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
 
@@ -222,14 +224,14 @@
 
 <!-- Toast que exibe mensagens -->
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="toastCategoria" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div id="toastCategoria" class="toast" role="alert">
         <div class="toast-header">
             <img src="/evenit/img/evenit-logo.svg" width="20" class="rounded me-2" alt="...">
             <strong class="me-auto">EvenIT</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
         </div>
         <div class="toast-body">
-            A categoria de id n°7 foi criada com sucesso.
+            A categoria de id n°X foi criada com sucesso.
         </div>
     </div>
 </div>
@@ -265,6 +267,6 @@
     })()
 
 </script>
-<script src="../js/eventos.js"></script>
+<script src="/evenit/js/eventos.js"></script>
 </body>
 </html>
