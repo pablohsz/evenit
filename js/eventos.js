@@ -123,7 +123,7 @@ $(document).ready(function () {
         if (this.checkValidity() === false) return;
         else if (!validarCampo(nome, 'texto')){
             toastErroEvento('O nome da categoria deve conter no mínimo 5 caracteres, aceitando letras, números e hífens (-).');
-            nome.focus();
+            document.getElementById("inputCategoria").focus();
             return;
         };
 
@@ -153,7 +153,7 @@ $(document).ready(function () {
         if (this.checkValidity() === false) return;
         else if (!validarCampo(nome, 'texto')){
             toastErroEvento('O nome da categoria deve conter no mínimo 5 caracteres, aceitando letras, números e hífens (-).');
-            nome.focus();
+            document.getElementById("categoriaEdicao").focus();
             return;
         };
 
@@ -250,7 +250,7 @@ $(document).ready(function () {
             return;
         } else if (!validarCampo(titulo, 'texto')){
             toastErroEvento('O título deve conter no mínimo 5 caracteres, aceitando letras, números e hífens (-).');
-            titulo.focus();
+            document.getElementById("titulo").focus();
             return;
         }
 
@@ -296,7 +296,7 @@ $(document).ready(function () {
             return;
         } else if (!validarCampo(titulo, 'texto')){
             toastErroEvento('O título deve conter no mínimo 5 caracteres, aceitando letras, números e hífens (-).');
-            titulo.focus();
+            document.getElementById("tituloEdicao").focus();
             return;
         }
 
@@ -363,7 +363,7 @@ $(document).ready(function () {
         let tipoRelatorio = document.getElementById('tipoRelatorio').value;
         if(tipoRelatorio == 'simples'){
             exibirToastRelatorio('Seu relatório está sendo processado...');
-            window.open('https://9368-2804-d59-9658-6400-e028-bf31-24e9-f134.ngrok-free.app/relatorio/pdf', '_blank');
+            window.open('https://7c56-2804-d59-9658-6400-5cbe-1fb4-729e-ddce.ngrok-free.app/relatorio/pdf', '_blank');
         } else if(tipoRelatorio == 'complexo'){
 
             let dataInicial = document.getElementById('dtInicioFiltro').value;
@@ -374,7 +374,7 @@ $(document).ready(function () {
             }
             dataInicial = converterDataFormato(dataInicial);
             dataFinal = converterDataFormato(dataFinal);
-            let urlRelatorio = `https://9368-2804-d59-9658-6400-e028-bf31-24e9-f134.ngrok-free.app/relatorio/pdf/data?inicio=${dataInicial}&fim=${dataFinal}`;
+            let urlRelatorio = `https://7c56-2804-d59-9658-6400-5cbe-1fb4-729e-ddce.ngrok-free.app/relatorio/pdf/data?inicio=${dataInicial}&fim=${dataFinal}`;
             exibirToastRelatorio('Seu relatório está sendo processado...');
             window.open(urlRelatorio, '_blank');
         } else if(tipoRelatorio == ''){

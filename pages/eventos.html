@@ -295,8 +295,7 @@
                     <div class="mb-3">
                         <label class="form-label">Titulo do Evento</label>
                         <input type="text" class="form-control" id="tituloEdicao" name="title"
-                               placeholder="Insira o título do evento" minlength="5" maxlength="120" required
-                               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                               placeholder="Insira o título do evento" minlength="5" maxlength="120" required>
                         <div class="invalid-feedback">
                             O título deve conter no mínimo 5 caracteres, aceitando letras, números e hífens
                             (-).
@@ -477,7 +476,7 @@
         Array.from(forms).forEach(form => {
             form.addEventListener('submit', event => {
                 if (!form.checkValidity()) {
-                    // event.preventDefault()
+                    event.preventDefault()
                     event.stopPropagation()
                 }
 
