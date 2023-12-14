@@ -1,4 +1,4 @@
-const baseUrl = 'https://7c56-2804-d59-9658-6400-5cbe-1fb4-729e-ddce.ngrok-free.app';
+const baseUrl = 'https://2a8f-2804-d59-9658-6400-4025-1723-32c9-4b03.ngrok-free.app';
 
 function postCredenciais(credenciais, callback) {
     $.ajax({
