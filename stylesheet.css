@@ -1,21 +1,21 @@
 .sidenavbar {
-    position: fixed; /* Torna a div fixa na página */
-    top: 0; /* Ajusta a posição no topo da página */
-    left: 0; /* Ajusta a posição à esquerda */
-    width: 200px; /* Define a largura da barra lateral */
-    height: 100vh; /* Define a altura igual à altura da janela */
-    background-color: #333; /* Cor de fundo da barra lateral */
-    color: white; /* Cor do texto */
-    padding: 20px; /* Espaçamento interno */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100vh;
+    background-color: #333;
+    color: white;
+    padding: 20px;
 }
 
 .content {
-    margin-left: 200px; /* Margem à esquerda para o conteúdo principal */
-    padding: 20px; /* Espaçamento interno */
+    margin-left: 200px;
+    padding: 20px;
 }
 
 .btn-largura-fixa {
-    width: 150px; /* Defina a largura desejada para os botões */
+    width: 150px;
 }
 
 .svg-container {

@@ -363,7 +363,7 @@ $(document).ready(function () {
         let tipoRelatorio = document.getElementById('tipoRelatorio').value;
         if(tipoRelatorio == 'simples'){
             exibirToastRelatorio('Seu relatório está sendo processado...');
-            window.open('https://2a8f-2804-d59-9658-6400-4025-1723-32c9-4b03.ngrok-free.app/relatorio/pdf', '_blank');
+            window.open(' https://7e5b-2804-d59-9658-6400-477-6c79-6d80-4bfe.ngrok-free.app/relatorio/pdf', '_blank');
         } else if(tipoRelatorio == 'complexo'){
 
             let dataInicial = document.getElementById('dtInicioFiltro').value;
@@ -374,7 +374,7 @@ $(document).ready(function () {
             }
             dataInicial = converterDataFormato(dataInicial);
             dataFinal = converterDataFormato(dataFinal);
-            let urlRelatorio = `https://2a8f-2804-d59-9658-6400-4025-1723-32c9-4b03.ngrok-free.app/relatorio/pdf/data?inicio=${dataInicial}&fim=${dataFinal}`;
+            let urlRelatorio = ` https://7e5b-2804-d59-9658-6400-477-6c79-6d80-4bfe.ngrok-free.app/relatorio/pdf/data?inicio=${dataInicial}&fim=${dataFinal}`;
             exibirToastRelatorio('Seu relatório está sendo processado...');
             window.open(urlRelatorio, '_blank');
         } else if(tipoRelatorio == ''){
